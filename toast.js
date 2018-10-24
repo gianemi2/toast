@@ -1,6 +1,6 @@
 /*!
  * Toast v1.0.0
- * Super light material dialog
+ * a Super light material dialog
  * by Marco Giannini
  */
 
@@ -8,10 +8,15 @@
 class Toast{
     constructor(message, type){
         let el = this;
+        if(!message){
+            throw new Error('First argument, message, is required. Should be a string.');
+        }
+        this.id = 'toast--test';
         this.message = message;
         this.type = type;
         this.toast = '';
         this.htmlButtons = document.createElement('div');
+        this.htmlButtons.classList.add('toast__choices');
         this.debug = false;
         this.defaultTimeout = 12 * 1000;
         this.return = '';
@@ -32,6 +37,7 @@ class Toast{
         this.createNode = function(){
             let toast = document.createElement('div');
             let text = document.createElement('p');
+            text.classList.add('toast__text');
             text.appendChild(document.createTextNode(this.message));
             toast.appendChild(text);
             toast.classList.add('toast');
@@ -64,7 +70,7 @@ class Toast{
     addChoice(option){
         let choice = document.createElement('a');
         choice.appendChild(document.createTextNode(option.label));
-        choice.classList.add('toast_choice');
+        choice.classList.add('toast__choices--choice');
         choice.addEventListener('click', () => {
             let callback = option.callback;
             if(callback && typeof(callback) === "function") {
@@ -91,6 +97,9 @@ class Toast{
         this.addChoice(this.choice.deny);
         document.body.appendChild(this.toast);
         setTimeout( () => {
+            this.toast.classList.add('toast--visible');
+        }, 100);
+        setTimeout( () => {
             this.hide();
         }, this.timeout);
     }
@@ -99,8 +108,9 @@ class Toast{
         if(self === undefined){
             self = this;
         }
+        self.toast.classList.remove('toast--visible');
         self.toast.classList.add('toast--hidden');
-        setTimeout( self.remove(), 500);
+        setTimeout( function() { self.remove(); }, 500);
     }
 
     remove(){

@@ -1,0 +1,49 @@
+/*Compile*/
+.toast{
+    position: fixed;
+    z-index: 999;
+    bottom: 50px;
+    transform: translateY(calc(100% + 50px));
+    left: 0;
+    right: 0;
+    transition: .3s;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 450px;
+    background-color: #323232;
+    color: #fff;
+    font-family: roboto;
+    -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);
+    -ms-box-shadow: 0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);
+    -o-box-shadow: 0 10px 20px rgba(0,0,0,0.19),0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+    &.toast--visible{
+        transform: translateY(0);
+    }
+
+    &.toast--hidden{
+        transform: translateY(calc(100% + 50px));
+    }
+
+    &__text{
+        margin-top: 0;
+        margin-bottom: 18px;
+        padding: 16px;
+        padding-bottom: 0;
+    }
+    &__choices{
+        padding: 5px;
+        border-top: 1px solid #4c4c4c;
+
+        &--choice{
+            color: #0391E0;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 5px 16px;
+            display: inline-block;
+            cursor: pointer;
+        }
+    }
+}
